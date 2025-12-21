@@ -1,0 +1,16 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+.env
+
+# Node
+node_modules/
+dist/
+.DS_Store
+
+# App specific
+uploads/
+backend/uploads/
+.gemini/
+.agent/workflow_runs/
