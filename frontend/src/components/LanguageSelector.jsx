@@ -1,17 +1,17 @@
 
 import { Globe } from 'lucide-react'
 
-const LANGUAGES = [
+export const LANGUAGES = [
     "Hindi", "English", "Tamil", "Telugu", "Kannada", "Malayalam",
     "Marathi", "Gujarati", "Bengali", "Punjabi", "Spanish", "French"
 ]
 
-export default function LanguageSelector({ selectedLanguage, onLanguageChange }) {
+export default function LanguageSelector({ selectedLanguage, onLanguageChange, label }) {
     return (
         <div className="flex flex-col space-y-2">
             <label className="text-sm font-medium text-neutral-400 flex items-center space-x-2">
                 <Globe className="w-4 h-4" />
-                <span>Explain in</span>
+                <span>{label || "Explain in"}</span>
             </label>
             <div className="relative">
                 <select
