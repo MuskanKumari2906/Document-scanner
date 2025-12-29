@@ -53,7 +53,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-900 text-neutral-100 font-sans selection:bg-indigo-500 selection:text-white pb-20">
+    <div className="min-h-screen bg-[#0a0a0a] text-neutral-100 font-sans selection:bg-indigo-500 selection:text-white pb-20 overflow-hidden relative">
 
       {showScanner && (
         <Scanner
@@ -65,30 +65,33 @@ function App() {
         />
       )}
 
-      {/* Background Gradient Mesh */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-900/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-cyan-900/20 rounded-full blur-[120px]" />
+      {/* Animated Background Mesh */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-600/30 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-600/30 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-2000" />
+        <div className="absolute -bottom-32 left-1/3 w-96 h-96 bg-purple-600/30 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-4000" />
       </div>
 
       {/* Header */}
-      <header className="border-b border-neutral-800 bg-neutral-900/50 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="bg-gradient-to-br from-indigo-600 to-cyan-600 p-2 rounded-lg shadow-lg shadow-indigo-500/20">
+      <header className="border-b border-white/5 bg-black/20 backdrop-blur-xl sticky top-0 z-50 supports-[backdrop-filter]:bg-black/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <div className="bg-gradient-to-br from-indigo-500 to-cyan-500 p-2.5 rounded-xl shadow-lg shadow-indigo-500/20 ring-1 ring-white/10">
               <FileText className="w-6 h-6 text-white" />
             </div>
-            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">
-              {t.appTitle}
-            </span>
+            <div>
+              <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-200 via-white to-cyan-200 tracking-tight">
+                {t.appTitle}
+              </h1>
+            </div>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-6">
             <HeaderLanguageSelector
               selectedLanguage={uiLanguage}
               onLanguageChange={setUiLanguage}
             />
-            <p className="text-sm text-neutral-400 hidden sm:block font-medium">
+            <p className="text-sm text-neutral-400 hidden sm:block font-medium border-l border-white/10 pl-6">
               {t.subtitle}
             </p>
           </div>
@@ -96,16 +99,16 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
-        <div className="text-center mb-12 space-y-4 animate-in slide-in-from-top-4 duration-700">
-          <div className="inline-flex items-center space-x-2 bg-indigo-500/10 text-indigo-400 px-3 py-1 rounded-full text-sm font-medium mb-2 border border-indigo-500/20">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+        <div className="text-center mb-16 space-y-6 animate-in slide-in-from-top-4 duration-700 fade-in">
+          <div className="inline-flex items-center space-x-2 bg-white/5 text-indigo-300 px-4 py-1.5 rounded-full text-sm font-medium border border-white/10 backdrop-blur-md shadow-xl">
             <Sparkles className="w-4 h-4" />
-            <span>{t.poweredBy}</span>
+            <span className="tracking-wide text-xs uppercase">{t.poweredBy}</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white drop-shadow-sm">
             {t.heroTitle} <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">{t.heroTitleHighlight}</span>
           </h1>
-          <p className="text-lg text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-neutral-400 max-w-2xl mx-auto leading-relaxed font-light">
             {t.heroDescription}
           </p>
         </div>
@@ -113,57 +116,64 @@ function App() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left: Controls */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-neutral-800/50 border border-neutral-700/50 rounded-2xl p-6 backdrop-blur-sm hover:border-indigo-500/30 transition-all duration-300 shadow-xl">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-lg font-semibold text-white">{t.step1}</h2>
-                <button
-                  onClick={() => setShowScanner(true)}
-                  className="flex items-center space-x-1 text-xs bg-indigo-500/20 text-indigo-300 px-3 py-1.5 rounded-full hover:bg-indigo-500/30 transition-all"
-                >
-                  <Camera className="w-3 h-3" />
-                  <span>{t.scanButton}</span>
-                </button>
-              </div>
+            <div className="glass-card rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 shadow-2xl relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-cyan-500/5 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="relative z-10">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-xl font-semibold text-white tracking-tight">{t.step1}</h2>
+                  <button
+                    onClick={() => setShowScanner(true)}
+                    className="flex items-center space-x-2 text-sm bg-indigo-500/20 text-indigo-200 px-4 py-2 rounded-lg hover:bg-indigo-500/30 transition-all border border-indigo-500/20"
+                  >
+                    <Camera className="w-4 h-4" />
+                    <span>{t.scanButton}</span>
+                  </button>
+                </div>
 
-              <FileUpload
-                onFileSelect={handleFileSelect}
-                selectedFile={file}
-                error={null}
-              />
+                <FileUpload
+                  onFileSelect={handleFileSelect}
+                  selectedFile={file}
+                  error={null}
+                />
+              </div>
             </div>
 
-            <div className="bg-neutral-800/50 border border-neutral-700/50 rounded-2xl p-6 backdrop-blur-sm hover:border-indigo-500/30 transition-all duration-300 shadow-xl">
-              <h2 className="text-lg font-semibold text-white mb-4">{t.step2}</h2>
-              <LanguageSelector
-                selectedLanguage={language}
-                onLanguageChange={setLanguage}
-                label={t.explainIn}
-              />
+            <div className="glass-card rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 shadow-2xl relative overflow-hidden">
+               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-cyan-500/5" />
+               <div className="relative z-10">
+                <h2 className="text-xl font-semibold text-white mb-6 tracking-tight">{t.step2}</h2>
+                <LanguageSelector
+                  selectedLanguage={language}
+                  onLanguageChange={setLanguage}
+                  label={t.explainIn}
+                />
 
-              <button
-                onClick={handleAnalyze}
-                disabled={!file || loading}
-                className="w-full mt-6 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white font-bold py-3 px-6 rounded-xl transition-all transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-indigo-500/25 flex items-center justify-center space-x-2"
-              >
-                {loading ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    <span>{t.processing}</span>
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="w-5 h-5" />
-                    <span>{t.analyzeButton}</span>
-                  </>
+                <button
+                  onClick={handleAnalyze}
+                  disabled={!file || loading}
+                  className="w-full mt-8 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white font-bold py-4 px-6 rounded-2xl transition-all transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-indigo-500/25 flex items-center justify-center space-x-3 group"
+                >
+                  {loading ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span>{t.processing}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                      <span className="text-lg">{t.analyzeButton}</span>
+                    </>
+                  )}
+                </button>
+
+                {error && (
+                  <div className="mt-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl flex items-start space-x-3 text-red-200 text-sm animate-in fade-in slide-in-from-top-2">
+                    <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                    <span>{error}</span>
+                  </div>
                 )}
-              </button>
-
-              {error && (
-                <div className="mt-4 p-4 bg-red-500/10 border border-red-500/20 rounded-xl flex items-start space-x-3 text-red-400 text-sm animate-in shake">
-                  <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                  <span>{error}</span>
-                </div>
-              )}
+              </div>
             </div>
           </div>
 
@@ -171,12 +181,12 @@ function App() {
           <div className="lg:col-span-7">
             {/* When no result/loading, show placeholder or loading state inside ExplanationView handles loading */}
             {!result && !loading ? (
-              <div className="bg-neutral-800/30 border border-neutral-700/30 rounded-2xl p-12 text-center text-neutral-500 flex flex-col items-center justify-center min-h-[500px] border-dashed">
-                <div className="w-20 h-20 bg-neutral-800 rounded-full flex items-center justify-center mb-4">
+              <div className="glass-card rounded-3xl p-12 text-center text-neutral-500 flex flex-col items-center justify-center min-h-[600px] border-dashed border-2 border-white/5 bg-white/[0.02]">
+                <div className="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center mb-6 ring-1 ring-white/10">
                   <FileText className="w-10 h-10 text-neutral-600" />
                 </div>
-                <h3 className="text-xl font-medium text-neutral-300 mb-2">Ready to Analyze</h3>
-                <p className="max-w-xs mx-auto">Upload a document and select your language to get started.</p>
+                <h3 className="text-2xl font-medium text-neutral-300 mb-3 font-outfit">Ready to Analyze</h3>
+                <p className="max-w-xs mx-auto text-neutral-500">Upload a document and select your language to get started with AI-powered insights.</p>
               </div>
             ) : (
               <ExplanationView

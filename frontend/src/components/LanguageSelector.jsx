@@ -17,10 +17,10 @@ export default function LanguageSelector({ selectedLanguage, onLanguageChange, l
                 <select
                     value={selectedLanguage}
                     onChange={(e) => onLanguageChange(e.target.value)}
-                    className="w-full bg-neutral-800 border border-neutral-700 text-neutral-200 rounded-lg px-4 py-2.5 appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all hover:bg-neutral-750 cursor-pointer"
+                    className="w-full bg-white/5 border border-white/10 text-neutral-200 rounded-xl px-4 py-3 appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all hover:bg-white/10 cursor-pointer"
                 >
                     {LANGUAGES.map((lang) => (
-                        <option key={lang} value={lang} className="bg-neutral-800">
+                        <option key={lang} value={lang} className="bg-neutral-900 text-neutral-200">
                             {lang}
                         </option>
                     ))}

@@ -100,21 +100,21 @@ export default function ExplanationView({ explanation, relatedLaws, loading, lan
     return (
         <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
             {/* AI Explanation Card */}
-            <div className="bg-neutral-800/80 border border-neutral-700 rounded-2xl p-6 backdrop-blur-sm shadow-xl">
-                <div className="flex items-center justify-between mb-4 pb-4 border-b border-neutral-700">
-                    <div className="flex items-center space-x-3">
-                        <div className="bg-indigo-500/20 p-2 rounded-lg">
-                            <FileText className="w-5 h-5 text-indigo-400" />
+            <div className="glass-card rounded-3xl p-8 shadow-2xl animate-in slide-in-from-bottom-4 duration-700">
+                <div className="flex items-center justify-between mb-6 pb-6 border-b border-white/10">
+                    <div className="flex items-center space-x-4">
+                        <div className="bg-indigo-500/20 p-2.5 rounded-xl ring-1 ring-indigo-500/30">
+                            <FileText className="w-6 h-6 text-indigo-300" />
                         </div>
-                        <h3 className="text-lg font-semibold text-white">{t.analysisTitle}</h3>
+                        <h3 className="text-xl font-semibold text-white tracking-tight">{t.analysisTitle}</h3>
                     </div>
 
                     {/* TTS Controls */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 bg-white/5 rounded-full p-1 border border-white/10">
                         {!isPlaying && !isPaused && (
                             <button
                                 onClick={handlePlay}
-                                className="p-2 rounded-full hover:bg-indigo-500/20 text-indigo-400 transition-colors"
+                                className="p-2 rounded-full hover:bg-indigo-500/20 text-indigo-300 transition-colors"
                                 title={t.play}
                             >
                                 <Volume2 className="w-5 h-5" />
@@ -123,7 +123,7 @@ export default function ExplanationView({ explanation, relatedLaws, loading, lan
                         {isPlaying && (
                             <button
                                 onClick={handlePause}
-                                className="p-2 rounded-full hover:bg-amber-500/20 text-amber-400 transition-colors"
+                                className="p-2 rounded-full hover:bg-amber-500/20 text-amber-300 transition-colors"
                                 title={t.pause}
                             >
                                 <PauseCircle className="w-5 h-5" />
@@ -132,7 +132,7 @@ export default function ExplanationView({ explanation, relatedLaws, loading, lan
                         {isPaused && (
                             <button
                                 onClick={handlePlay}
-                                className="p-2 rounded-full hover:bg-indigo-500/20 text-indigo-400 transition-colors"
+                                className="p-2 rounded-full hover:bg-indigo-500/20 text-indigo-300 transition-colors"
                                 title={t.play}
                             >
                                 <Volume2 className="w-5 h-5" />
@@ -141,7 +141,7 @@ export default function ExplanationView({ explanation, relatedLaws, loading, lan
                         {(isPlaying || isPaused) && (
                             <button
                                 onClick={handleStop}
-                                className="p-2 rounded-full hover:bg-red-500/20 text-red-400 transition-colors"
+                                className="p-2 rounded-full hover:bg-red-500/20 text-red-300 transition-colors"
                                 title={t.stop}
                             >
                                 <StopCircle className="w-5 h-5" />
@@ -150,16 +150,17 @@ export default function ExplanationView({ explanation, relatedLaws, loading, lan
                     </div>
                 </div>
 
-                <div className="prose prose-invert prose-indigo max-w-none text-neutral-300">
+                <div className="prose prose-invert prose-indigo max-w-none text-neutral-300 leading-relaxed">
                     <ReactMarkdown
                         components={{
-                            h1: ({ node, ...props }) => <h3 className="text-xl font-bold text-white mb-4" {...props} />,
-                            h2: ({ node, ...props }) => <h4 className="text-lg font-bold text-white mt-6 mb-3" {...props} />,
-                            h3: ({ node, ...props }) => <h5 className="text-base font-bold text-white mt-4 mb-2" {...props} />,
-                            p: ({ node, ...props }) => <p className="leading-relaxed mb-4" {...props} />,
-                            ul: ({ node, ...props }) => <ul className="list-disc pl-5 space-y-1 mb-4" {...props} />,
-                            li: ({ node, ...props }) => <li className="marker:text-indigo-400" {...props} />,
-                            strong: ({ node, ...props }) => <strong className="text-indigo-300 font-semibold" {...props} />,
+                            h1: ({ node, ...props }) => <h3 className="text-2xl font-bold text-white mb-6 font-outfit" {...props} />,
+                            h2: ({ node, ...props }) => <h4 className="text-xl font-bold text-white mt-8 mb-4 font-outfit" {...props} />,
+                            h3: ({ node, ...props }) => <h5 className="text-lg font-bold text-white mt-6 mb-3 font-outfit" {...props} />,
+                            p: ({ node, ...props }) => <p className="leading-7 mb-4 text-neutral-300" {...props} />,
+                            ul: ({ node, ...props }) => <ul className="list-disc pl-5 space-y-2 mb-6 text-neutral-300" {...props} />,
+                            li: ({ node, ...props }) => <li className="marker:text-indigo-400 pl-1" {...props} />,
+                            strong: ({ node, ...props }) => <strong className="text-indigo-200 font-semibold" {...props} />,
+                            blockquote: ({ node, ...props }) => <blockquote className="border-l-4 border-indigo-500/50 pl-4 py-1 italic text-neutral-400 bg-white/5 rounded-r-lg my-4" {...props} />,
                         }}
                     >
                         {explanation}
@@ -169,9 +170,9 @@ export default function ExplanationView({ explanation, relatedLaws, loading, lan
 
             {/* RAG Context Card */}
             {relatedLaws && relatedLaws.length > 0 && (
-                <div className="bg-neutral-800/50 border border-neutral-700 rounded-2xl p-6 backdrop-blur-sm">
+                <div className="glass-card rounded-3xl p-6 shadow-xl">
                     <div className="flex items-center space-x-3 mb-4">
-                        <div className="bg-amber-500/20 p-2 rounded-lg">
+                        <div className="bg-amber-500/20 p-2 rounded-lg ring-1 ring-amber-500/30">
                             <BookOpen className="w-5 h-5 text-amber-400" />
                         </div>
                         <h3 className="text-lg font-semibold text-white">{t.legalContextTitle}</h3>
@@ -179,9 +180,9 @@ export default function ExplanationView({ explanation, relatedLaws, loading, lan
 
                     <div className="space-y-3">
                         {relatedLaws.map((law, index) => (
-                            <div key={index} className="flex gap-3 bg-neutral-900/50 p-3 rounded-lg border border-neutral-700/50 hover:border-neutral-600 transition-colors">
-                                <Info className="w-4 h-4 text-neutral-500 flex-shrink-0 mt-1" />
-                                <p className="text-sm text-neutral-300">{law}</p>
+                            <div key={index} className="flex gap-3 bg-white/5 p-4 rounded-xl border border-white/5 hover:border-white/20 transition-colors">
+                                <Info className="w-5 h-5 text-neutral-400 flex-shrink-0 mt-0.5" />
+                                <p className="text-sm text-neutral-300 leading-relaxed">{law}</p>
                             </div>
                         ))}
                     </div>
