@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    nodePolyfills(),
+    // nodePolyfills(),
   ],
   server: {
     port: 5187,
